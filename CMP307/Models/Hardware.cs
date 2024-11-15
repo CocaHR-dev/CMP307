@@ -11,6 +11,7 @@ namespace CMP307.Models
     public partial class Hardware
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int HardwareId { get; set; }
 
         [Required]

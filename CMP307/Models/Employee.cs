@@ -11,6 +11,7 @@ namespace CMP307.Models
     public partial class Employee
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeId { get; set; }
 
         [Required]
