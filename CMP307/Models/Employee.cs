@@ -14,21 +14,25 @@ namespace CMP307.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "First Name is required")]
         public string FirstName { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Last Name is required")]
         public string LastName { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Department is required")]
         public int DepartmentId { get; set; }
 
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; } = null!;
 
         public virtual ICollection<Hardware> HardwareAssets { get; set; } = new List<Hardware>();
+
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

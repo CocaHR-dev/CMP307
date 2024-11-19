@@ -14,28 +14,28 @@ namespace CMP307.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int HardwareId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "System Name is required")]
         [MaxLength(100)]
         public string SystemName { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Model is required")]
         [MaxLength(50)]
         public string Model { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Manufacturer is required")]
         public string Manufacturer { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Type is required")]
         public string Type { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "IP Address is required")]
         public string IpAddress { get; set; } = null!;
 
         public DateTime? PurchaseDate { get; set; }
 
-        public string Note { get; set; } = null!;
+        public string? Note { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Employee is required")]
         public int EmployeeId { get; set; }
 
         [ForeignKey("EmployeeId")]

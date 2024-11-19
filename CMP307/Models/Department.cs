@@ -14,7 +14,7 @@ namespace CMP307.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DepartmentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Department Name is required")]
         public string DepartmentName { get; set; } = null!;
 
         public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
