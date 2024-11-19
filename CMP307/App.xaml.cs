@@ -9,6 +9,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CMP307.TemplateSelectors;
+using CMP307.ViewModels;
+using CMP307.Services;
 
 namespace CMP307
 {
@@ -41,6 +44,23 @@ namespace CMP307
             // Register DbContext with connection string from configuration
             services.AddDbContext<ScottishGlenContext>(options =>
                 options.UseMySql(_configuration.GetConnectionString("ScottishGlenDb"), ServerVersion.AutoDetect(_configuration.GetConnectionString("ScottishGlenDb"))));
+
+            // Register template selectors
+            services.AddSingleton<AddEditButtonTemplateSelector>();
+            services.AddSingleton<DeleteButtonTemplateSelector>();
+
+            // Register services
+            services.AddTransient<DepartmentService>();
+            services.AddTransient<EmployeeService>();
+            services.AddTransient<HardwareService>();
+
+            // Register ViewModels
+            services.AddTransient<EmployeeViewModel>();
+            services.AddTransient<HardwareViewModel>();
+            services.AddTransient<DepartmentViewModel>();
+
+            // Register MainWindow
+            services.AddTransient<MainWindow>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -57,6 +77,10 @@ namespace CMP307
                 var dbContext = scope.ServiceProvider.GetRequiredService<ScottishGlenContext>();
                 dbContext.Database.Migrate();
             }
+
+            // Show the main window
+            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
