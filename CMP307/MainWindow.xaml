@@ -22,6 +22,9 @@
     </Grid>
 
     <Window.Resources>
+        <DataTemplate x:Key="EmptyTemplate">
+            <!-- Empty template -->
+        </DataTemplate>
         <DataTemplate x:Key="AddButtonTemplate">
             <Button Content="Add" Click="AddButton_Click"/>
         </DataTemplate>
